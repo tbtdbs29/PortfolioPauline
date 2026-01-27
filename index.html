@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pauline Guilcher | Portfolio Info-Com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Palette "Smooth & Feminine" */
+            --bg-color: #fffaf5; /* Blanc crème très doux */
+            --text-color: #4a4a4a; /* Gris chaud au lieu du noir dur */
+            --accent-primary: #ffbdad; /* Pêche doux */
+            --accent-secondary: #d3cce3; /* Lavande subtile */
+            --card-bg: #ffffff;
+            --shadow-soft: 0 10px 30px -10px rgba(0,0,0,0.1);
+            --gradient-smooth: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif; /* Corps de texte propre */
+            overflow-x: hidden;
+            line-height: 1.7;
+            /* Ajout de formes organiques floues en arrière-plan */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 189, 173, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(211, 204, 227, 0.3) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* --- TYPOGRAPHIE ÉLÉGANTE --- */
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif; /* Titres avec empattements élégants */
+            font-weight: 700;
+            color: #2a2a2a;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Soulignement doux et dégradé */
+        h2::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 4px;
+            background: var(--gradient-smooth);
+            margin: 10px auto 0;
+            border-radius: 10px;
+            opacity: 0.7;
+        }
+
+        /* --- LAYOUT & ANIMATIONS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 8rem 0;
+            /* Animation d'apparition au scroll */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .hero span.highlight {
+            background: var(--gradient-smooth);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-style: italic;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            font-weight: 300;
+        }
+
+        .hero p.location {
+            margin-top: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-soft);
+            font-size: 0.9rem;
+        }
+        
+        .location-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--gradient-smooth);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* --- MANIFESTO --- */
+        .manifesto p {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.6;
+        }
+
+        /* --- PROJETS (GRID) --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 25px; /* Coins très arrondis */
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            text-align: center;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15);
+        }
+
+        /* Numéro décoratif en arrière-plan */
+        .project-number {
+            font-size: 8rem;
+            font-family: 'Playfair Display';
+            font-weight: 700;
+            color: var(--accent-primary);
+            opacity: 0.1;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        .project-content { position: relative; z-index: 1; }
+
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+
+        .project-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: #f4f4f4;
+            color: #666;
+            padding: 5px 15px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Bouton "Smooth" */
+        .btn-details {
+            margin-top: 1.5rem;
+            background: var(--gradient-smooth);
+            border: none;
+            color: #fff;
+            padding: 12px 30px;
+            font-family: 'Montserrat';
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 189, 173, 0.4);
+        }
+
+        .btn-details:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 189, 173, 0.6);
+        }
+
+        /* --- MODAL (POPUP PROJET) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 250, 245, 0.9); /* Fond clair et flou */
+            z-index: 10000;
+            overflow-y: auto;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            margin: 5vh auto;
+            padding: 4rem;
+            width: 90%;
+            max-width: 1100px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            animation: slideUpSmooth 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        @keyframes slideUpSmooth {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 2.5rem;
+            color: var(--accent-primary);
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .close-modal:hover { transform: rotate(90deg); }
+
+        .project-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 900px) {
+            .project-detail-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .modal-content { padding: 2rem; }
+        }
+
+        .detail-section { margin-bottom: 2.5rem; }
+        
+        .detail-section h4 { 
+            color: var(--accent-primary); 
+            font-family: 'Montserrat';
+            text-transform: uppercase; 
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 350px;
+            background: #f8f3f0; /* Gris/rose très pâle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            color: var(--accent-secondary);
+            font-family: 'Playfair Display';
+            font-style: italic;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+        }
+
+        .skills-list li, .steps-list li {
+            margin-bottom: 0.8rem;
+            list-style-type: none;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .skills-list li::before, .steps-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            line-height: 1rem;
+        }
+
+        /* Style spécial pour l'encart "Utilité futur" */
+        .future-utility-box {
+            background: linear-gradient(to right, #fff, #fffaf5);
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 4px solid var(--accent-primary);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* --- CONTACT --- */
+        .contact { text-align: center; }
+        .email-link {
+            font-size: clamp(2rem, 5vw, 4rem);
+            background: var(--gradient-smooth);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            font-family: 'Playfair Display';
+            font-weight: 700;
+            transition: letter-spacing 0.3s;
+        }
+        .email-link:hover {
+            letter-spacing: 2px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        /* --- STYLE DU CARROUSEL --- */
+        .carousel-container {
+            width: 100%;
+            height: 350px; /* Même hauteur que ton ancien placeholder */
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .carousel-slide {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* Transition très smooth */
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* L'image remplit la zone sans être déformée */
+            flex-shrink: 0;
+        }
+
+        /* Points de navigation */
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #fff;
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <section class="hero visible">
+            <h1>Pauline <span class="highlight">Guilcher.</span></h1>
+            <p class="subtitle">Étudiante BUT Info-Com. Créative & Stratège.</p>
+            <div class="location">
+                <span class="location-dot"></span>
+                Basée entre Taulé et Morlaix, Finistère.
+            </div>
+        </section>
+
+        <section class="manifesto">
+            <div style="text-align: center;">
+                <h2>Ma vision</h2>
+            </div>
+            <p>La communication n'est pas un bruit de fond, c'est une <span style="color:var(--accent-primary); font-style:italic;">connexion</span>. Ce portfolio est mon laboratoire d'idées. Il ne montre pas seulement ce que j'ai fait, mais comment je pense : avec structure, élégance et impact.</p>
+        </section>
+
+        <section id="projects">
+            <div style="text-align: center;">
+                <h2>Travaux Sélectionnés</h2>
+            </div>
+            <div class="projects-grid">
+                
+                <article class="project-card">
+                    <span class="project-number">01</span>
+                    <div class="project-content">
+                        <h3 class="project-title">Campagne "BZH Digital"</h3>
+                        <div class="project-tags">
+                            <span class="tag">Stratégie</span>
+                            <span class="tag">Social Media</span>
+                        </div>
+                        <p>Refonte de l'identité numérique d'une association locale pour un public jeune.</p>
+                        <button class="btn-details" onclick="openModal('modal1')">Découvrir</button>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="project-number">02</span>
+                    <div class="project-content">
+                        <h3 class="project-title">Magazine "L'Écho"</h3>
+                        <div class="project-tags">
+                            <span class="tag">Édition</span>
+                            <span class="tag">Direction Artistique</span>
+                        </div>
+                        <p>Conception complète d'une maquette de magazine culturel.</p>
+                        <button class="btn-details" onclick="openModal('modal2')">Découvrir</button>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="project-number">03</span>
+                    <div class="project-content">
+                        <h3 class="project-title">Event "Taulé Jeunesse"</h3>
+                        <div class="project-tags">
+                            <span class="tag">Évènementiel</span>
+                            <span class="tag">Coordination</span>
+                        </div>
+                        <p>Organisation fictive d'un festival local pour les 15-25 ans.</p>
+                        <button class="btn-details" onclick="openModal('modal3')">Découvrir</button>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="project-number">04</span>
+                    <div class="project-content">
+                        <h3 class="project-title">Audit & Stratégie PME</h3>
+                        <div class="project-tags">
+                            <span class="tag">Analyse SWOT</span>
+                            <span class="tag">Recommandations</span>
+                        </div>
+                        <p>Analyse stratégique et plan d'action pour une entreprise morlaisienne.</p>
+                        <button class="btn-details" onclick="openModal('modal4')">Découvrir</button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="contact">
+            <h2>Parlons de demain</h2>
+            <div class="contact-content">
+                <p style="margin-bottom: 2rem; font-size: 1.1rem;">Disponible pour une alternance ou des projets freelance.</p>
+                <a href="mailto:pauline.guilcher@email.com" class="email-link">Me contacter.</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Pauline Guilcher — Fait avec ❤️ dans le Finistère.</p>
+        </footer>
+    </div>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal1')">&times;</button>
+            
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">Campagne "BZH Digital"</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Refonte Identité & Stratégie Social Media</p>
+            
+            <div class="project-detail-grid">
+                <div>
+                    <div class="carousel-container">
+                        <div class="carousel-slide" id="carousel-slide-1">
+                            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop" alt="Feed Instagram Mockup">
+                            <img src="https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?q=80&w=1000&auto=format&fit=crop" alt="Planning Stratégique">
+                            <img src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?q=80&w=1000&auto=format&fit=crop" alt="Brainstorming Pluie">
+                        </div>
+                        <div class="carousel-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Le But</h4>
+                        <p>Moderniser l'image d'une association locale pour captiver une audience 18-30 ans, souvent imperméable à la communication traditionnelle.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Le Processus</h4>
+                        <ul class="steps-list">
+                            <li>Phase d'immersion et benchmark des comptes "tendance".</li>
+                            <li>Création d'un "Moodboard" visuel (couleurs pop, ton décalé).</li>
+                            <li>Design des gabarits sous Illustrator/Canva.</li>
+                            <li>Rédaction d'un calendrier éditorial sur 4 semaines.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="detail-section">
+                        <h4>Compétences Clés</h4>
+                        <ul class="skills-list">
+                            <li>Community Management Stratégique</li>
+                            <li>Création de contenu visuel (PAO)</li>
+                            <li>Copywriting engageant</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Bilan & Apprentissages</h4>
+                        <p><strong>Ce qui a fonctionné :</strong> La nouvelle charte graphique a augmenté les partages de 40% lors des tests.</p>
+                        <p style="margin-top: 1rem;"><strong>Défi rencontré :</strong> Estimer le budget publicitaire (Ads) était complexe sans données historiques. J'ai dû me baser sur des benchmarks sectoriels.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Axes d'amélioration</h4>
+                        <p>Mettre en place des tableaux de bord (KPIs) plus précis pour analyser le ROI des posts en temps réel.</p>
+                    </div>
+
+                    <div class="detail-section future-utility-box">
+                        <h4>Valeur pour mon futur métier</h4>
+                        <p>Ce projet prouve ma capacité à ne pas seulement "poster", mais à construire une image de marque cohérente qui répond à des objectifs business précis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal2')">&times;</button>
+            
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">Campagne "BZH Digital"</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Refonte Identité & Stratégie Social Media</p>
+            
+            <div class="project-detail-grid">
+                <div>
+                    <div class="photo-placeholder">Insérer une belle image du feed Instagram ici</div>
+                    
+                    <div class="detail-section">
+                        <h4>Le But</h4>
+                        <p>Moderniser l'image d'une association locale pour captiver une audience 18-30 ans, souvent imperméable à la communication traditionnelle.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Le Processus</h4>
+                        <ul class="steps-list">
+                            <li>Phase d'immersion et benchmark des comptes "tendance".</li>
+                            <li>Création d'un "Moodboard" visuel (couleurs pop, ton décalé).</li>
+                            <li>Design des gabarits sous Illustrator/Canva.</li>
+                            <li>Rédaction d'un calendrier éditorial sur 4 semaines.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="detail-section">
+                        <h4>Compétences Clés</h4>
+                        <ul class="skills-list">
+                            <li>Community Management Stratégique</li>
+                            <li>Création de contenu visuel (PAO)</li>
+                            <li>Copywriting engageant</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Bilan & Apprentissages</h4>
+                        <p><strong>Ce qui a fonctionné :</strong> La nouvelle charte graphique a augmenté les partages de 40% lors des tests.</p>
+                        <p style="margin-top: 1rem;"><strong>Défi rencontré :</strong> Estimer le budget publicitaire (Ads) était complexe sans données historiques. J'ai dû me baser sur des benchmarks sectoriels.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Axes d'amélioration</h4>
+                        <p>Mettre en place des tableaux de bord (KPIs) plus précis pour analyser le ROI des posts en temps réel.</p>
+                    </div>
+
+                    <div class="detail-section future-utility-box">
+                        <h4>Valeur pour mon futur métier</h4>
+                        <p>Ce projet prouve ma capacité à ne pas seulement "poster", mais à construire une image de marque cohérente qui répond à des objectifs business précis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal3')">&times;</button>
+            
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">Campagne "BZH Digital"</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Refonte Identité & Stratégie Social Media</p>
+            
+            <div class="project-detail-grid">
+                <div>
+                    <div class="photo-placeholder">Insérer une belle image du feed Instagram ici</div>
+                    
+                    <div class="detail-section">
+                        <h4>Le But</h4>
+                        <p>Moderniser l'image d'une association locale pour captiver une audience 18-30 ans, souvent imperméable à la communication traditionnelle.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Le Processus</h4>
+                        <ul class="steps-list">
+                            <li>Phase d'immersion et benchmark des comptes "tendance".</li>
+                            <li>Création d'un "Moodboard" visuel (couleurs pop, ton décalé).</li>
+                            <li>Design des gabarits sous Illustrator/Canva.</li>
+                            <li>Rédaction d'un calendrier éditorial sur 4 semaines.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="detail-section">
+                        <h4>Compétences Clés</h4>
+                        <ul class="skills-list">
+                            <li>Community Management Stratégique</li>
+                            <li>Création de contenu visuel (PAO)</li>
+                            <li>Copywriting engageant</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Bilan & Apprentissages</h4>
+                        <p><strong>Ce qui a fonctionné :</strong> La nouvelle charte graphique a augmenté les partages de 40% lors des tests.</p>
+                        <p style="margin-top: 1rem;"><strong>Défi rencontré :</strong> Estimer le budget publicitaire (Ads) était complexe sans données historiques. J'ai dû me baser sur des benchmarks sectoriels.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Axes d'amélioration</h4>
+                        <p>Mettre en place des tableaux de bord (KPIs) plus précis pour analyser le ROI des posts en temps réel.</p>
+                    </div>
+
+                    <div class="detail-section future-utility-box">
+                        <h4>Valeur pour mon futur métier</h4>
+                        <p>Ce projet prouve ma capacité à ne pas seulement "poster", mais à construire une image de marque cohérente qui répond à des objectifs business précis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal4')">&times;</button>
+            
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">Campagne "BZH Digital"</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Refonte Identité & Stratégie Social Media</p>
+            
+            <div class="project-detail-grid">
+                <div>
+                    <div class="photo-placeholder">Insérer une belle image du feed Instagram ici</div>
+                    
+                    <div class="detail-section">
+                        <h4>Le But</h4>
+                        <p>Moderniser l'image d'une association locale pour captiver une audience 18-30 ans, souvent imperméable à la communication traditionnelle.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Le Processus</h4>
+                        <ul class="steps-list">
+                            <li>Phase d'immersion et benchmark des comptes "tendance".</li>
+                            <li>Création d'un "Moodboard" visuel (couleurs pop, ton décalé).</li>
+                            <li>Design des gabarits sous Illustrator/Canva.</li>
+                            <li>Rédaction d'un calendrier éditorial sur 4 semaines.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="detail-section">
+                        <h4>Compétences Clés</h4>
+                        <ul class="skills-list">
+                            <li>Community Management Stratégique</li>
+                            <li>Création de contenu visuel (PAO)</li>
+                            <li>Copywriting engageant</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Bilan & Apprentissages</h4>
+                        <p><strong>Ce qui a fonctionné :</strong> La nouvelle charte graphique a augmenté les partages de 40% lors des tests.</p>
+                        <p style="margin-top: 1rem;"><strong>Défi rencontré :</strong> Estimer le budget publicitaire (Ads) était complexe sans données historiques. J'ai dû me baser sur des benchmarks sectoriels.</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Axes d'amélioration</h4>
+                        <p>Mettre en place des tableaux de bord (KPIs) plus précis pour analyser le ROI des posts en temps réel.</p>
+                    </div>
+
+                    <div class="detail-section future-utility-box">
+                        <h4>Valeur pour mon futur métier</h4>
+                        <p>Ce projet prouve ma capacité à ne pas seulement "poster", mais à construire une image de marque cohérente qui répond à des objectifs business précis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- GESTION DES MODALS ---
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // --- ANIMATIONS AU SCROLL (SMOOTH REVEAL) ---
+        // Utilisation de Intersection Observer pour une performance optimale
+        const observerOptions = {
+            threshold: 0.2 // Déclenche quand 20% de l'élément est visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // On observe toutes les sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- LOGIQUE DU CARROUSEL ---
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('#carousel-slide-1 img');
+    const slideContainer = document.getElementById('carousel-slide-1');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = slides.length;
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        // Déplace le conteneur
+        slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Met à jour les points
+        dots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    // Change d'image toutes les 3.5 secondes
+    setInterval(nextSlide, 3500);
+    </script>
+</body>
+</html>
