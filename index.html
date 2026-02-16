@@ -7,409 +7,149 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            /* Palette "Smooth & Feminine" */
-            --bg-color: #fffaf5; /* Blanc crème très doux */
-            --text-color: #4a4a4a; /* Gris chaud au lieu du noir dur */
-            --accent-primary: #ffbdad; /* Pêche doux */
-            --accent-secondary: #d3cce3; /* Lavande subtile */
-            --card-bg: #ffffff;
-            --shadow-soft: 0 10px 30px -10px rgba(0,0,0,0.1);
-            --gradient-smooth: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-        }
+        .tag.in-progress { background-color: var(--accent-primary); color: white; font-weight: bold; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Montserrat', sans-serif; /* Corps de texte propre */
-            overflow-x: hidden;
-            line-height: 1.7;
-            /* Ajout de formes organiques floues en arrière-plan */
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 189, 173, 0.2) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(211, 204, 227, 0.3) 0%, transparent 40%);
-            background-attachment: fixed;
-        }
-
-        /* --- TYPOGRAPHIE ÉLÉGANTE --- */
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif; /* Titres avec empattements élégants */
-            font-weight: 700;
-            color: #2a2a2a;
-        }
-
-        h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 1.1;
-        }
-
-        h2 {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Soulignement doux et dégradé */
-        h2::after {
-            content: '';
-            display: block;
-            width: 60%;
-            height: 4px;
-            background: var(--gradient-smooth);
-            margin: 10px auto 0;
-            border-radius: 10px;
-            opacity: 0.7;
-        }
-
-        /* --- LAYOUT & ANIMATIONS --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 8rem 0;
-            /* Animation d'apparition au scroll */
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        .hero span.highlight {
-            background: var(--gradient-smooth);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-style: italic;
-        }
-
-        .hero p.subtitle {
-            font-size: 1.5rem;
-            margin-top: 1rem;
-            font-weight: 300;
-        }
-
-        .hero p.location {
-            margin-top: 1.5rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #fff;
-            padding: 10px 20px;
-            border-radius: 30px;
-            box-shadow: var(--shadow-soft);
-            font-size: 0.9rem;
-        }
-        
-        .location-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--gradient-smooth);
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        /* --- MANIFESTO --- */
-        .manifesto p {
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            font-family: 'Playfair Display', serif;
-            line-height: 1.6;
-        }
-
-        /* --- PROJETS (GRID) --- */
-        .projects-grid {
+        /* --- STYLES SECTION EXPÉRIENCE --- */
+        .experience-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            padding: 3rem 2rem;
-            border-radius: 25px; /* Coins très arrondis */
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            text-align: center;
-        }
-
-        .project-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15);
-        }
-
-        /* Numéro décoratif en arrière-plan */
-        .project-number {
-            font-size: 8rem;
-            font-family: 'Playfair Display';
-            font-weight: 700;
-            color: var(--accent-primary);
-            opacity: 0.1;
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 0;
-        }
-
-        .project-content { position: relative; z-index: 1; }
-
-        .project-title {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            margin-top: 2rem;
-        }
-
-        .project-tags {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            font-size: 0.75rem;
-            background: #f4f4f4;
-            color: #666;
-            padding: 5px 15px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Bouton "Smooth" */
-        .btn-details {
-            margin-top: 1.5rem;
-            background: var(--gradient-smooth);
-            border: none;
-            color: #fff;
-            padding: 12px 30px;
-            font-family: 'Montserrat';
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 189, 173, 0.4);
-        }
-
-        .btn-details:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 189, 173, 0.6);
-        }
-
-        /* --- MODAL (POPUP PROJET) --- */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 250, 245, 0.9); /* Fond clair et flou */
-            z-index: 10000;
-            overflow-y: auto;
-            backdrop-filter: blur(8px);
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            margin: 5vh auto;
-            padding: 4rem;
-            width: 90%;
-            max-width: 1100px;
-            border-radius: 30px;
-            box-shadow: var(--shadow-soft);
-            position: relative;
-            animation: slideUpSmooth 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        @keyframes slideUpSmooth {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            font-size: 2.5rem;
-            color: var(--accent-primary);
-            background: none;
-            border: none;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-
-        .close-modal:hover { transform: rotate(90deg); }
-
-        .project-detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
         }
-        
-        @media (max-width: 900px) {
-            .project-detail-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .modal-content { padding: 2rem; }
+
+        .job-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 3px solid transparent;
+            position: relative;
         }
 
-        .detail-section { margin-bottom: 2.5rem; }
-        
-        .detail-section h4 { 
-            color: var(--accent-primary); 
-            font-family: 'Montserrat';
-            text-transform: uppercase; 
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 3px solid var(--accent-primary);
         }
-        
-        .photo-placeholder {
-            width: 100%;
-            height: 350px;
-            background: #f8f3f0; /* Gris/rose très pâle */
+
+        /* --- Style spécifique pour la carte interactive Radio --- */
+        .job-card.interactive-card {
+            cursor: pointer;
+            border: 2px solid var(--accent-primary);
+            background: linear-gradient(to bottom right, #fff, #fffaf5);
+        }
+
+        .job-card.interactive-card::after {
+            content: '🎧 Cliquez pour écouter';
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--accent-primary);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 189, 173, 0.4);
+            animation: floatBadge 3s ease-in-out infinite;
+        }
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .job-card.interactive-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(255, 189, 173, 0.25);
+        }
+
+        .job-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .job-icon {
+            font-size: 2rem;
+            background: #fffaf5;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            color: var(--accent-secondary);
-            font-family: 'Playfair Display';
-            font-style: italic;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
-        }
-
-        .skills-list li, .steps-list li {
-            margin-bottom: 0.8rem;
-            list-style-type: none;
-            position: relative;
-            padding-left: 25px;
-        }
-        
-        .skills-list li::before, .steps-list li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent-primary);
-            font-size: 1.5rem;
-            line-height: 1rem;
-        }
-
-        /* Style spécial pour l'encart "Utilité futur" */
-        .future-utility-box {
-            background: linear-gradient(to right, #fff, #fffaf5);
-            padding: 2rem;
-            border-radius: 20px;
-            border-left: 4px solid var(--accent-primary);
-            box-shadow: var(--shadow-soft);
-        }
-
-        /* --- CONTACT --- */
-        .contact { text-align: center; }
-        .email-link {
-            font-size: clamp(2rem, 5vw, 4rem);
-            background: var(--gradient-smooth);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-            font-family: 'Playfair Display';
-            font-weight: 700;
-            transition: letter-spacing 0.3s;
-        }
-        .email-link:hover {
-            letter-spacing: 2px;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            padding: 3rem 0;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #888;
-        }
-        /* --- STYLE DU CARROUSEL --- */
-        .carousel-container {
-            width: 100%;
-            height: 350px; /* Même hauteur que ton ancien placeholder */
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .carousel-slide {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* Transition très smooth */
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* L'image remplit la zone sans être déformée */
+            border-radius: 50%;
             flex-shrink: 0;
         }
 
-        /* Points de navigation */
-        .carousel-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+        .job-title h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2a2a2a;
+            margin-bottom: 0.2rem;
+        }
+
+        .job-company {
+            font-size: 0.9rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .job-tags {
             display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .job-tags .tag {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            background: #f9f9f9;
+            color: #777;
+            border: 1px solid #eee;
+        }
+
+        /* Style pour la liste des podcasts dans la modale */
+        .podcast-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 1rem;
+        }
+        .podcast-item {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #f0f0f0;
+        }
+        .podcast-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-color: var(--accent-primary);
+        }
+        .podcast-item a {
+            text-decoration: none;
+            color: #4a4a4a;
+            font-weight: 500;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .dot.active {
-            background: #fff;
-            transform: scale(1.3);
+        .play-icon {
+            font-size: 1.2rem;
+            color: var(--accent-primary);
         }
     </style>
 </head>
@@ -417,11 +157,16 @@
 
     <div class="container">
         <section class="hero visible">
-            <h1>Pauline <span class="highlight">Guilcher.</span></h1>
-            <p class="subtitle">Étudiante BUT Info-Com. Créative & Stratège.</p>
-            <div class="location">
-                <span class="location-dot"></span>
-                Basée entre Taulé et Morlaix, Finistère.
+            <div class="hero-content">
+                <h1>Pauline <span class="highlight">Guilcher.</span></h1>
+                <p class="subtitle">Étudiante BUT Info-Com. Créative & Stratège.</p>
+                <div class="location">
+                    <span class="location-dot"></span>
+                    Basée entre Taulé et Morlaix, Finistère.
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="assets/pauline.JPG" alt="Pauline Guilcher Portrait">
             </div>
         </section>
 
@@ -441,12 +186,13 @@
                 <article class="project-card">
                     <span class="project-number">01</span>
                     <div class="project-content">
-                        <h3 class="project-title">Campagne "BZH Digital"</h3>
+                        <h3 class="project-title">Festiv’Art</h3>
                         <div class="project-tags">
-                            <span class="tag">Stratégie</span>
-                            <span class="tag">Social Media</span>
+                            <span class="tag in-progress">En cours</span>
+                            <span class="tag">Logistique</span>
+                            <span class="tag">Relation Artistes</span>
                         </div>
-                        <p>Refonte de l'identité numérique d'une association locale pour un public jeune.</p>
+                        <p>Coordination technique et accueil artistes pour un festival de talents étudiants.</p>
                         <button class="btn-details" onclick="openModal('modal1')">Découvrir</button>
                     </div>
                 </article>
@@ -454,12 +200,12 @@
                 <article class="project-card">
                     <span class="project-number">02</span>
                     <div class="project-content">
-                        <h3 class="project-title">Magazine "L'Écho"</h3>
+                        <h3 class="project-title">Conférence Engagée</h3>
                         <div class="project-tags">
-                            <span class="tag">Édition</span>
-                            <span class="tag">Direction Artistique</span>
+                            <span class="tag">Programmation</span>
+                            <span class="tag">Gestion de Crise</span>
                         </div>
-                        <p>Conception complète d'une maquette de magazine culturel.</p>
+                        <p>Organisation d'une conférence sur la musique et la politique. Gestion d'imprévus majeurs.</p>
                         <button class="btn-details" onclick="openModal('modal2')">Découvrir</button>
                     </div>
                 </article>
@@ -467,12 +213,12 @@
                 <article class="project-card">
                     <span class="project-number">03</span>
                     <div class="project-content">
-                        <h3 class="project-title">Event "Taulé Jeunesse"</h3>
+                        <h3 class="project-title">Chapiteau Magique</h3>
                         <div class="project-tags">
-                            <span class="tag">Évènementiel</span>
-                            <span class="tag">Coordination</span>
+                            <span class="tag">Websérie</span>
+                            <span class="tag">Design Graphique</span>
                         </div>
-                        <p>Organisation fictive d'un festival local pour les 15-25 ans.</p>
+                        <p>Websérie en trois épisodes visant à valoriser le cirque contemporain et le rôle du chapiteau.</p>
                         <button class="btn-details" onclick="openModal('modal3')">Découvrir</button>
                     </div>
                 </article>
@@ -480,93 +226,281 @@
                 <article class="project-card">
                     <span class="project-number">04</span>
                     <div class="project-content">
-                        <h3 class="project-title">Audit & Stratégie PME</h3>
+                        <h3 class="project-title">Gestion de Crise</h3>
                         <div class="project-tags">
-                            <span class="tag">Analyse SWOT</span>
-                            <span class="tag">Recommandations</span>
+                            <span class="tag">Media Training</span>
+                            <span class="tag">Stratégie</span>
                         </div>
-                        <p>Analyse stratégique et plan d'action pour une entreprise morlaisienne.</p>
+                        <p>Simulation immersive de gestion de crise et intervention télévisée face aux journalistes.</p>
                         <button class="btn-details" onclick="openModal('modal4')">Découvrir</button>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <span class="project-number">05</span>
+                    <div class="project-content">
+                        <h3 class="project-title">Mission Maison des Femmes</h3>
+                        <div class="project-tags">
+                            <span class="tag in-progress">En cours</span>
+                            <span class="tag">Stratégie Associative</span>
+                        </div>
+                        <p>Analyse et refonte de la stratégie de communication pour la bibliothèque de la Maison des Femmes.</p>
+                        <button class="btn-details" onclick="openModal('modal5')">Découvrir</button>
                     </div>
                 </article>
 
             </div>
         </section>
 
-        <section class="contact">
-            <h2>Parlons de demain</h2>
-            <div class="contact-content">
-                <p style="margin-bottom: 2rem; font-size: 1.1rem;">Disponible pour une alternance ou des projets freelance.</p>
-                <a href="mailto:pauline.guilcher@email.com" class="email-link">Me contacter.</a>
+        <section id="experience" style="background-color: rgba(255,255,255,0.4); border-radius: 30px; padding: 4rem 2rem; margin-bottom: 4rem;">
+            <div style="text-align: center;">
+                <h2>Parcours & Engagements</h2>
+                <p style="max-width: 600px; margin: 1rem auto; font-size: 0.95rem; color: #666;">
+                    Au-delà de mes études, je multiplie les expériences de terrain. Ces engagements forgent mon adaptabilité, mon sens du contact et ma rigueur professionnelle.
+                </p>
+            </div>
+
+            <div class="experience-grid">
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">🎓</div>
+                        <div class="job-title">
+                            <h3>Co-présidente</h3>
+                            <span class="job-company">Well’com (BDE)</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Management</span>
+                        <span class="tag">Leadership</span>
+                        <span class="tag">Gestion projet</span>
+                        <span class="tag">Communication</span>
+                    </div>
+                </div>
+
+                <div class="job-card interactive-card" onclick="openModal('modal-radio')">
+                    <div class="job-header">
+                        <div class="job-icon">🎙️</div>
+                        <div class="job-title">
+                            <h3>Animatrice radio</h3>
+                            <span class="job-company">Fréquence Mutine</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Animation</span>
+                        <span class="tag">Interview</span>
+                        <span class="tag">Reportage</span>
+                        <span class="tag">Réseaux Sociaux</span>
+                        <span class="tag">Créativité</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">🏰</div>
+                        <div class="job-title">
+                            <h3>Médiatrice culturelle</h3>
+                            <span class="job-company">Château du Taureau</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Médiation</span>
+                        <span class="tag">Valorisation patrimoine</span>
+                        <span class="tag">Accueil public</span>
+                        <span class="tag">Logistique</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">🎵</div>
+                        <div class="job-title">
+                            <h3>Runner / Accueil artiste</h3>
+                            <span class="job-company">Festival Panoramas</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Gestion planning</span>
+                        <span class="tag">Réactivité</span>
+                        <span class="tag">Logistique</span>
+                        <span class="tag">Imprévus</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">🎶</div>
+                        <div class="job-title">
+                            <h3>Bénévolat (Catering)</h3>
+                            <span class="job-company">La Carène</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Gestion catering</span>
+                        <span class="tag">Gestion artistes</span>
+                        <span class="tag">Travail en équipe</span>
+                        <span class="tag">Organisation</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">🏛️</div>
+                        <div class="job-title">
+                            <h3>Réceptionniste</h3>
+                            <span class="job-company">Mairie de Carantec</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Accueil physique & tél</span>
+                        <span class="tag">Relation public</span>
+                        <span class="tag">Organisation</span>
+                        <span class="tag">Polyvalence</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">🏝️</div>
+                        <div class="job-title">
+                            <h3>Agent d’accueil</h3>
+                            <span class="job-company">Mairie de Carantec</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Gestion flux touristique</span>
+                        <span class="tag">Contrôle accès</span>
+                        <span class="tag">Information</span>
+                        <span class="tag">Responsabilité</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">🍻</div>
+                        <div class="job-title">
+                            <h3>Service bar</h3>
+                            <span class="job-company">Fête du Sieck</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Relation client</span>
+                        <span class="tag">Gestion flux</span>
+                        <span class="tag">Encaissement</span>
+                        <span class="tag">Travail sous pression</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">🎟️</div>
+                        <div class="job-title">
+                            <h3>Hôtesse d’accueil</h3>
+                            <span class="job-company">Klass Kaerenn / City One</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Représentation marque</span>
+                        <span class="tag">Accueil VIP</span>
+                        <span class="tag">Promotion</span>
+                        <span class="tag">Relation public</span>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-icon">📦</div>
+                        <div class="job-title">
+                            <h3>Préparatrice commande</h3>
+                            <span class="job-company">Leclerc St-Pol-de-Léon</span>
+                        </div>
+                    </div>
+                    <div class="job-tags">
+                        <span class="tag">Logistique</span>
+                        <span class="tag">Rigueur</span>
+                        <span class="tag">Rapidité</span>
+                        <span class="tag">Travail en équipe</span>
+                    </div>
+                </div>
+
             </div>
         </section>
 
+        <section class="contact">
+            <h2>Parlons de demain</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">
+                Un projet ? Une alternance ? N'hésitez pas à m'écrire.
+            </p>
+
+            <form action="https://formspree.io/f/xzddzebo" method="POST" class="contact-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Votre Nom" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Votre Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Votre Message..." required></textarea>
+                </div>
+                <button type="submit" class="btn-details" style="font-size: 1rem; padding: 15px 40px;">
+                    Envoyer le message
+                </button>
+            </form>
+        </section>
+
         <footer>
-            <p>© 2026 Pauline Guilcher — Fait avec ❤️ dans le Finistère.</p>
+            <p><a href="https://vercelportfolio-drab.vercel.app/" target="_blank">© Thibault DUBOIS</a> — Fait avec ❤️ dans le Finistère.</p>
         </footer>
     </div>
 
     <div id="modal1" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('modal1')">&times;</button>
-            
-            <h2 style="text-align: left; margin-bottom: 0.5rem;">Campagne "BZH Digital"</h2>
-            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Refonte Identité & Stratégie Social Media</p>
-            
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">Festiv’Art</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">
+                <span class="tag in-progress" style="font-style: normal; font-size: 0.8rem; vertical-align: middle; margin-right: 10px;">EN COURS</span>
+                Coordination logistique & relation artistes
+            </p>
             <div class="project-detail-grid">
                 <div>
-                    <div class="carousel-container">
-                        <div class="carousel-slide" id="carousel-slide-1">
-                            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop" alt="Feed Instagram Mockup">
-                            <img src="https://images.unsplash.com/photo-1493934558415-9d19f0b2b4d2?q=80&w=1000&auto=format&fit=crop" alt="Planning Stratégique">
-                            <img src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?q=80&w=1000&auto=format&fit=crop" alt="Brainstorming Pluie">
+                    <div class="photo-placeholder" style="background: repeating-linear-gradient(45deg,#fffaf5,#fffaf5 10px,#f4f4f4 10px,#f4f4f4 20px);">
+                        <div style="text-align: center;">
+                            <p style="font-weight: bold; font-size: 1.5rem; color: var(--text-color);">WORK IN PROGRESS</p>
+                            <p style="font-size: 1rem; margin-top: 10px;">Projet en cours de développement</p>
                         </div>
-                        <div class="carousel-dots">
-                            <span class="dot active"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </div>
-                    </div>
-                    <div class="detail-section">
-                        <h4>Le But</h4>
-                        <p>Moderniser l'image d'une association locale pour captiver une audience 18-30 ans, souvent imperméable à la communication traditionnelle.</p>
                     </div>
 
+                    <div class="detail-section">
+                        <h4>Le But</h4>
+                        <p>Un festival de talents étudiants, imaginé par et pour les étudiants. Un événement à taille humaine porté par une ambition forte : valoriser la créativité et l’engagement artistique au sein du campus.</p>
+                    </div>
                     <div class="detail-section">
                         <h4>Le Processus</h4>
                         <ul class="steps-list">
-                            <li>Phase d'immersion et benchmark des comptes "tendance".</li>
-                            <li>Création d'un "Moodboard" visuel (couleurs pop, ton décalé).</li>
-                            <li>Design des gabarits sous Illustrator/Canva.</li>
-                            <li>Rédaction d'un calendrier éditorial sur 4 semaines.</li>
+                            <li>Pilotage de la coordination technique.</li>
+                            <li>Lien entre les intervenants pour assurer la précision des enchaînements.</li>
+                            <li>Gestion de la relation artistes.</li>
+                            <li>Anticipation des temps d'installation.</li>
                         </ul>
                     </div>
                 </div>
-
                 <div>
                     <div class="detail-section">
                         <h4>Compétences Clés</h4>
                         <ul class="skills-list">
-                            <li>Community Management Stratégique</li>
-                            <li>Création de contenu visuel (PAO)</li>
-                            <li>Copywriting engageant</li>
+                            <li>Coordination technique événementielle</li>
+                            <li>Gestion de plannings complexes</li>
+                            <li>Relation & Accueil artistes</li>
+                            <li>Rigueur & Réactivité</li>
                         </ul>
                     </div>
-
                     <div class="detail-section">
-                        <h4>Bilan & Apprentissages</h4>
-                        <p><strong>Ce qui a fonctionné :</strong> La nouvelle charte graphique a augmenté les partages de 40% lors des tests.</p>
-                        <p style="margin-top: 1rem;"><strong>Défi rencontré :</strong> Estimer le budget publicitaire (Ads) était complexe sans données historiques. J'ai dû me baser sur des benchmarks sectoriels.</p>
+                        <h4>État d'avancement</h4>
+                        <p>Le projet est en phase de développement actif, avec une coordination continue des équipes et des artistes.</p>
                     </div>
-
-                    <div class="detail-section">
-                        <h4>Axes d'amélioration</h4>
-                        <p>Mettre en place des tableaux de bord (KPIs) plus précis pour analyser le ROI des posts en temps réel.</p>
-                    </div>
-
                     <div class="detail-section future-utility-box">
                         <h4>Valeur pour mon futur métier</h4>
-                        <p>Ce projet prouve ma capacité à ne pas seulement "poster", mais à construire une image de marque cohérente qui répond à des objectifs business précis.</p>
+                        <p>Ce projet m’a confirmé que l’événementiel est un environnement dans lequel je me sens à ma place.</p>
                     </div>
                 </div>
             </div>
@@ -576,54 +510,51 @@
     <div id="modal2" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('modal2')">&times;</button>
-            
-            <h2 style="text-align: left; margin-bottom: 0.5rem;">Campagne "BZH Digital"</h2>
-            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Refonte Identité & Stratégie Social Media</p>
-            
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">La Musique comme Arme</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Conférence étudiante & Gestion de crise</p>
             <div class="project-detail-grid">
                 <div>
-                    <div class="photo-placeholder">Insérer une belle image du feed Instagram ici</div>
-                    
-                    <div class="detail-section">
-                        <h4>Le But</h4>
-                        <p>Moderniser l'image d'une association locale pour captiver une audience 18-30 ans, souvent imperméable à la communication traditionnelle.</p>
+                    <div class="carousel-container">
+                         <div class="carousel-slide" id="carousel-slide-2">
+                             <img src="assets/photos_proj2/Com'férence.jpg" alt="Vue d'ensemble conférence">
+                             <img src="assets/photos_proj2/com'ference.jpg" alt="Discussion conférence">
+                             <img src="assets/photos_proj2/Moi com'ference.jpg" alt="Pauline en conférence">
+                        </div>
+                        <div class="carousel-dots" id="dots-2">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
                     </div>
-
                     <div class="detail-section">
-                        <h4>Le Processus</h4>
+                        <h4>Le Sujet</h4>
+                        <p>Une conférence questionnant l'usage de la musique par les artistes comme outil de revendication et de mobilisation politique.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Mes Missions</h4>
                         <ul class="steps-list">
-                            <li>Phase d'immersion et benchmark des comptes "tendance".</li>
-                            <li>Création d'un "Moodboard" visuel (couleurs pop, ton décalé).</li>
-                            <li>Design des gabarits sous Illustrator/Canva.</li>
-                            <li>Rédaction d'un calendrier éditorial sur 4 semaines.</li>
+                            <li><strong>Programmation :</strong> Recherche et coordination des intervenant·es.</li>
+                            <li><strong>Création de contenu :</strong> Réalisation de la vidéo d'ouverture.</li>
+                            <li><strong>Logistique :</strong> Réservation matériel technique.</li>
                         </ul>
                     </div>
                 </div>
-
                 <div>
                     <div class="detail-section">
                         <h4>Compétences Clés</h4>
                         <ul class="skills-list">
-                            <li>Community Management Stratégique</li>
-                            <li>Création de contenu visuel (PAO)</li>
-                            <li>Copywriting engageant</li>
+                            <li>Négociation & Relationnel</li>
+                            <li>Gestion de crise (Adaptabilité)</li>
+                            <li>Montage vidéo</li>
                         </ul>
                     </div>
-
                     <div class="detail-section">
-                        <h4>Bilan & Apprentissages</h4>
-                        <p><strong>Ce qui a fonctionné :</strong> La nouvelle charte graphique a augmenté les partages de 40% lors des tests.</p>
-                        <p style="margin-top: 1rem;"><strong>Défi rencontré :</strong> Estimer le budget publicitaire (Ads) était complexe sans données historiques. J'ai dû me baser sur des benchmarks sectoriels.</p>
+                        <h4 style="color: #e07a5f;">L'Imprévu (Crisis Management)</h4>
+                        <p>Annulation de deux intervenants sur trois une heure avant le début. Refonte immédiate du déroulé pour maintenir l'événement.</p>
                     </div>
-
-                    <div class="detail-section">
-                        <h4>Axes d'amélioration</h4>
-                        <p>Mettre en place des tableaux de bord (KPIs) plus précis pour analyser le ROI des posts en temps réel.</p>
-                    </div>
-
                     <div class="detail-section future-utility-box">
                         <h4>Valeur pour mon futur métier</h4>
-                        <p>Ce projet prouve ma capacité à ne pas seulement "poster", mais à construire une image de marque cohérente qui répond à des objectifs business précis.</p>
+                        <p>Ce projet prouve que je sais garder mon sang-froid et que l'imprévu me pousse à réagir.</p>
                     </div>
                 </div>
             </div>
@@ -633,54 +564,47 @@
     <div id="modal3" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('modal3')">&times;</button>
-            
-            <h2 style="text-align: left; margin-bottom: 0.5rem;">Campagne "BZH Digital"</h2>
-            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Refonte Identité & Stratégie Social Media</p>
-            
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">Chapiteau Magique</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Websérie Documentaire | Design & Audiovisuel</p>
             <div class="project-detail-grid">
                 <div>
-                    <div class="photo-placeholder">Insérer une belle image du feed Instagram ici</div>
-                    
+                    <div class="carousel-container">
+                        <div class="carousel-slide" id="carousel-slide-3">
+                            <iframe src="https://www.youtube.com/embed/eCv7Ry_jI18" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/soNF7IZoDqA" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/m9Uu4A8oSdA" allowfullscreen></iframe>
+                        </div>
+                        <div class="carousel-dots" id="dots-3">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
                     <div class="detail-section">
                         <h4>Le But</h4>
-                        <p>Moderniser l'image d'une association locale pour captiver une audience 18-30 ans, souvent imperméable à la communication traditionnelle.</p>
+                        <p>Une websérie visant à valoriser le cirque contemporain et à mettre en lumière le rôle central du chapiteau.</p>
                     </div>
-
                     <div class="detail-section">
                         <h4>Le Processus</h4>
                         <ul class="steps-list">
-                            <li>Phase d'immersion et benchmark des comptes "tendance".</li>
-                            <li>Création d'un "Moodboard" visuel (couleurs pop, ton décalé).</li>
-                            <li>Design des gabarits sous Illustrator/Canva.</li>
-                            <li>Rédaction d'un calendrier éditorial sur 4 semaines.</li>
+                            <li>Intégration de l’équipe design graphique et audiovisuelle.</li>
+                            <li>Conception et montage du teaser du projet.</li>
+                            <li>Travail en conditions réelles avec le <strong>Carré Magique</strong>.</li>
                         </ul>
                     </div>
                 </div>
-
                 <div>
                     <div class="detail-section">
                         <h4>Compétences Clés</h4>
                         <ul class="skills-list">
-                            <li>Community Management Stratégique</li>
-                            <li>Création de contenu visuel (PAO)</li>
-                            <li>Copywriting engageant</li>
+                            <li>Design Graphique</li>
+                            <li>Montage Vidéo</li>
+                            <li>Adaptation commanditaire</li>
                         </ul>
                     </div>
-
-                    <div class="detail-section">
-                        <h4>Bilan & Apprentissages</h4>
-                        <p><strong>Ce qui a fonctionné :</strong> La nouvelle charte graphique a augmenté les partages de 40% lors des tests.</p>
-                        <p style="margin-top: 1rem;"><strong>Défi rencontré :</strong> Estimer le budget publicitaire (Ads) était complexe sans données historiques. J'ai dû me baser sur des benchmarks sectoriels.</p>
-                    </div>
-
-                    <div class="detail-section">
-                        <h4>Axes d'amélioration</h4>
-                        <p>Mettre en place des tableaux de bord (KPIs) plus précis pour analyser le ROI des posts en temps réel.</p>
-                    </div>
-
                     <div class="detail-section future-utility-box">
                         <h4>Valeur pour mon futur métier</h4>
-                        <p>Ce projet prouve ma capacité à ne pas seulement "poster", mais à construire une image de marque cohérente qui répond à des objectifs business précis.</p>
+                        <p>Savoir traduire l'âme d'une structure culturelle à travers des supports audiovisuels.</p>
                     </div>
                 </div>
             </div>
@@ -690,56 +614,168 @@
     <div id="modal4" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('modal4')">&times;</button>
-            
-            <h2 style="text-align: left; margin-bottom: 0.5rem;">Campagne "BZH Digital"</h2>
-            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Refonte Identité & Stratégie Social Media</p>
-            
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">Gestion de Crise</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">Simulation Réelle & Media Training</p>
             <div class="project-detail-grid">
                 <div>
-                    <div class="photo-placeholder">Insérer une belle image du feed Instagram ici</div>
-                    
-                    <div class="detail-section">
-                        <h4>Le But</h4>
-                        <p>Moderniser l'image d'une association locale pour captiver une audience 18-30 ans, souvent imperméable à la communication traditionnelle.</p>
+                    <div class="carousel-container">
+                        <div class="carousel-slide" id="carousel-slide-4">
+                            <img src="assets/photos_proj4/IMG_8907.png" alt="Plateau TV Crisis">
+                            <img src="assets/photos_proj4/IMG_8905.jpeg" alt="Interview Plateau">
+                        </div>
+                        <div class="carousel-dots" id="dots-4">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                        </div>
                     </div>
 
                     <div class="detail-section">
-                        <h4>Le Processus</h4>
-                        <ul class="steps-list">
-                            <li>Phase d'immersion et benchmark des comptes "tendance".</li>
-                            <li>Création d'un "Moodboard" visuel (couleurs pop, ton décalé).</li>
-                            <li>Design des gabarits sous Illustrator/Canva.</li>
-                            <li>Rédaction d'un calendrier éditorial sur 4 semaines.</li>
-                        </ul>
+                        <h4>Le Contexte</h4>
+                        <p>Dans le cadre d'un module de communication de crise, j'ai travaillé sur l'analyse d'une situation sensible nécessitant une réponse stratégique adaptée. L'objectif : identifier les risques réputationnels et élaborer un plan de communication pour préserver l'image de l'organisation.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4>L'Immersion (Le Rush)</h4>
+                        <p>Une journée immersive (9h-14h30) où notre équipe, jouant le service com' d'une entreprise fictive, a dû gérer un <strong>bad buzz majeur</strong> (vidéo virale d'une employée). Nous avons dû agir dans l'urgence, avec des rebondissements constants (conférences de presse, syndicats...).</p>
                     </div>
                 </div>
-
                 <div>
                     <div class="detail-section">
-                        <h4>Compétences Clés</h4>
+                        <h4 style="color: #e07a5f;">Mon Action Phare : Le Plateau TV</h4>
+                        <p>J’ai choisi de <strong>représenter l’entreprise en plateau télé</strong> afin de répondre directement aux questions des journalistes. Cette prise d’initiative m’a permis de défendre la position de l’organisation à travers une intervention stratégique, argumentée et maîtrisée, dans un contexte de forte pression.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Compétences Mobilisées</h4>
                         <ul class="skills-list">
-                            <li>Community Management Stratégique</li>
-                            <li>Création de contenu visuel (PAO)</li>
-                            <li>Copywriting engageant</li>
+                            <li>Media Training & Prise de parole publique</li>
+                            <li>Gestion du stress & Réactivité</li>
+                            <li>Élaboration d'éléments de langage</li>
+                            <li>Leadership & Prise d'initiative</li>
                         </ul>
                     </div>
-
-                    <div class="detail-section">
-                        <h4>Bilan & Apprentissages</h4>
-                        <p><strong>Ce qui a fonctionné :</strong> La nouvelle charte graphique a augmenté les partages de 40% lors des tests.</p>
-                        <p style="margin-top: 1rem;"><strong>Défi rencontré :</strong> Estimer le budget publicitaire (Ads) était complexe sans données historiques. J'ai dû me baser sur des benchmarks sectoriels.</p>
-                    </div>
-
-                    <div class="detail-section">
-                        <h4>Axes d'amélioration</h4>
-                        <p>Mettre en place des tableaux de bord (KPIs) plus précis pour analyser le ROI des posts en temps réel.</p>
-                    </div>
-
                     <div class="detail-section future-utility-box">
                         <h4>Valeur pour mon futur métier</h4>
-                        <p>Ce projet prouve ma capacité à ne pas seulement "poster", mais à construire une image de marque cohérente qui répond à des objectifs business précis.</p>
+                        <p>Savoir faire face à une caméra quand tout va mal est une compétence rare. Ce projet prouve ma capacité à ne pas subir les événements, mais à les gérer avec sang-froid.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal5')">&times;</button>
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">Mission Maison des Femmes</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">
+                <span class="tag in-progress" style="font-style: normal; font-size: 0.8rem; vertical-align: middle; margin-right: 10px;">EN COURS</span>
+                Action de Communication #2 | Stratégie Associative
+            </p>
+            <div class="project-detail-grid">
+                <div>
+                    <div class="photo-placeholder" style="background: repeating-linear-gradient(45deg,#fffaf5,#fffaf5 10px,#f4f4f4 10px,#f4f4f4 20px);">
+                        <div style="text-align: center;">
+                            <p style="font-weight: bold; font-size: 1.5rem; color: var(--text-color);">WORK IN PROGRESS</p>
+                            <p style="font-size: 1rem; margin-top: 10px;">Livraison : Fin Mars</p>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Le Contexte</h4>
+                        <p>Dans le cadre de l’Action de Communication #2, nous collaborons avec de véritables commanditaires : l'<strong>Association de la bibliothèque de la Maison des Femmes de Saint-Brieuc</strong>.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Les Objectifs</h4>
+                        <p>L’objectif est d’identifier les points faibles et les axes d’amélioration de leur communication actuelle, puis de proposer une stratégie cohérente, durable et adaptée à leurs enjeux spécifiques.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="detail-section">
+                        <h4>Compétences en développement</h4>
+                        <ul class="skills-list">
+                            <li>Audit stratégique en milieu associatif</li>
+                            <li>Communication engageante</li>
+                            <li>Relation client réel</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4>État d'avancement</h4>
+                        <p>Ce projet est actuellement <strong>en cours de réalisation</strong> et se poursuivra jusqu’à la fin du mois de mars.</p>
+                        <ul class="steps-list" style="margin-top: 1rem;">
+                            <li>Phase 1 : Rencontre client & Brief (Fait)</li>
+                            <li>Phase 2 : Audit & Diagnostic (En cours)</li>
+                            <li>Phase 3 : Recommandations stratégiques (À venir)</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section future-utility-box">
+                        <h4>Pourquoi ce projet compte</h4>
+                        <p>Travailler pour une cause sociétale forte (la Maison des Femmes) demande une justesse de ton et une sensibilité particulière. C'est un exercice de style essentiel pour une future communicante.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-radio" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal-radio')">&times;</button>
+            <h2 style="text-align: left; margin-bottom: 0.5rem;">Fréquence Mutine</h2>
+            <p style="font-family: 'Playfair Display'; font-style: italic; color: var(--accent-primary); margin-bottom: 2rem;">
+                Animation Radio & Reportages Terrain
+            </p>
+            
+            <div class="carousel-container" style="max-width: 800px; margin: 0 auto 3rem auto;">
+                <div class="carousel-slide" id="carousel-slide-radio">
+                    <video controls>
+                        <source src="assets/frequencemutine/interview.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la balise vidéo.
+                    </video>
+                    
+                    <img src="assets/frequencemutine/IMG_8908.png" alt="Studio Fréquence Mutine">
+                    <img src="assets/frequencemutine/IMG_8909.png" alt="Animation Radio">
+                    <img src="assets/frequencemutine/IMG_9729.jpeg" alt="Interview terrain">
+                    <img src="assets/frequencemutine/IMG_9153.jpeg" alt="Ambiance studio">
+                </div>
+                <div class="carousel-dots" id="dots-radio">
+                    <span class="dot active"></span> <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <p style="margin-bottom: 1.5rem;">Retrouvez ci-dessous une sélection de mes interventions, interviews et reportages réalisés pour la station.</p>
+                
+                <ul class="podcast-list">
+                    <li class="podcast-item">
+                        <a href="https://www.frequencemutine.fr/podcast/midi-les-mutins-17-04-2024/" target="_blank">
+                            <span class="play-icon">▶</span> Reportage Terrain
+                        </a>
+                        <span class="tag">Reportage</span>
+                    </li>
+                    <li class="podcast-item">
+                        <a href="https://www.frequencemutine.fr/podcast/midi-les-mutins-07-05-2024/" target="_blank">
+                            <span class="play-icon">▶</span> Interview Printemps de Bourges #1
+                        </a>
+                        <span class="tag">Interview</span>
+                    </li>
+                    <li class="podcast-item">
+                        <a href="https://www.frequencemutine.fr/podcast/midi-les-mutins-06-05-2024/" target="_blank">
+                            <span class="play-icon">▶</span> Interview Printemps de Bourges #2
+                        </a>
+                        <span class="tag">Interview</span>
+                    </li>
+                    <li class="podcast-item">
+                        <a href="https://www.frequencemutine.fr/podcast/midi-les-mutins-11-04-2024/" target="_blank">
+                            <span class="play-icon">▶</span> Interview Magazine Brestoise
+                        </a>
+                        <span class="tag">Presse</span>
+                    </li>
+                    <li class="podcast-item">
+                        <a href="https://www.frequencemutine.fr/podcast/midi-les-mutins-06-03-2024/" target="_blank">
+                            <span class="play-icon">▶</span> Interview Astro Hiver
+                        </a>
+                        <span class="tag">Culture</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -747,14 +783,12 @@
     <script>
         // --- GESTION DES MODALS ---
         function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'block';
+            document.getElementById(modalId).style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'none';
+            document.getElementById(modalId).style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
@@ -765,53 +799,58 @@
             }
         }
 
-        // --- ANIMATIONS AU SCROLL (SMOOTH REVEAL) ---
-        // Utilisation de Intersection Observer pour une performance optimale
-        const observerOptions = {
-            threshold: 0.2 // Déclenche quand 20% de l'élément est visible
-        };
-
+        // --- ANIMATIONS ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, observerOptions);
+        }, { threshold: 0.2 });
 
-        // On observe toutes les sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
 
-        // --- LOGIQUE DU CARROUSEL ---
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('#carousel-slide-1 img');
-    const slideContainer = document.getElementById('carousel-slide-1');
-    const dots = document.querySelectorAll('.dot');
-    const totalSlides = slides.length;
+        // --- CARROUSELS ---
+        function initCarousel(slideContainerId, dotsContainerId) {
+            let currentSlide = 0;
+            const slideContainer = document.getElementById(slideContainerId);
+            if (!slideContainer) return;
 
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateCarousel();
-    }
+            const dots = document.querySelectorAll(`#${dotsContainerId} .dot`);
+            const totalSlides = slideContainer.children.length;
 
-    function updateCarousel() {
-        // Déplace le conteneur
-        slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-        
-        // Met à jour les points
-        dots.forEach((dot, index) => {
-            if (index === currentSlide) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
+            function goToSlide(index) {
+                currentSlide = index;
+                slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+                if(dots.length > 0) {
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentSlide);
+                    });
+                }
+                
+                // Pause la vidéo si on change de slide (optionnel mais recommandé)
+                const videos = slideContainer.querySelectorAll('video');
+                videos.forEach(video => video.pause());
             }
-        });
-    }
 
-    // Change d'image toutes les 3.5 secondes
-    setInterval(nextSlide, 3500);
+            if(dots.length > 0) {
+                dots.forEach((dot, index) => {
+                    dot.onclick = () => goToSlide(index);
+                });
+            }
+
+            // Pas d'autoplay pour les carrousels contenant des vidéos (radio et chapiteau)
+            if (!slideContainerId.includes('slide-3') && !slideContainerId.includes('slide-radio') && totalSlides > 1) {
+                setInterval(() => {
+                    let next = (currentSlide + 1) % totalSlides;
+                    goToSlide(next);
+                }, 3500);
+            }
+        }
+
+        initCarousel('carousel-slide-1', 'dots-1');
+        initCarousel('carousel-slide-2', 'dots-2');
+        initCarousel('carousel-slide-3', 'dots-3');
+        initCarousel('carousel-slide-4', 'dots-4');
+        initCarousel('carousel-slide-radio', 'dots-radio');
     </script>
 </body>
 </html>
